@@ -6,15 +6,18 @@ var googleMaps = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAkwr2hIuNm_8
 var map;
 var mapDiv = document.getElementById('map');
 var mapOptions = {
-    center: {lat: 49.03158, lng: 12.105280},
+    center: {
+        lat: 49.03158,
+        lng: 12.105280
+    },
     zoom: 8,
     mapTypeControl: false
 };
 
 //Get the Google Maps script
 $.getScript(googleMaps)
-// handle googleMaps success
-    .done(function () {
+    // handle googleMaps success
+    .done(function() {
 
         // initialize map
         map = new google.maps.Map(mapDiv, mapOptions);
@@ -25,6 +28,6 @@ $.getScript(googleMaps)
 
     })
     // could not load google maps
-    .fail(function () {
+    .fail(function() {
         alert('GoogleMaps could not be loaded.');
     });

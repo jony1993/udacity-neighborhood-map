@@ -1,64 +1,63 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Udacity Neighborhood Map</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--Bootstrap for responsiveness-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-    <!--Jasny for off canvas-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
-    <!--Custom CSS-->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<!--Off Canvas Menu-->
-<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
-    <a class="navmenu-brand visible-md visible-lg" href="#">Bavarian Cities</a>
-    <form>
-
-        <div class="group">
-            <input type="text" data-bind="textInput: searchBox">
-            <span class="highlight"></span>
-            <span class="bar"></span>
-            <label>Filter by Name</label>
-        </div>
-    </form>
-    <ul class="nav navmenu-nav list-group" data-bind="foreach: filteredPlaces">
-        <li class="list-group-item" data-bind="click: $root.showPlace">
-            <span data-bind="text: name"></span>
-        </li>
-    </ul>
-</div>
-<div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
-    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="#">Project name</a>
-</div>
-<!--Main Content-->
-<div id="main">
-    <!--Google Maps-->
-    <div id="map" style="width: 100%; height: 100vh"></div>
-</div>
-<!-- /.container -->
-<!--Ressources-->
-<!--JQuery-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<!--Bootstrap JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--Jasny-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
-<!--Knockout JS-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
-<!--Custom JS-->
-<script src="js/data.js"></script>
-<script src="js/model.js"></script>
-<script src="js/model_view.js"></script>
-<script src="js/main.js"></script>
-</body>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>Udacity Neighborhood Map</title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--Bootstrap for responsiveness-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+      <!--Jasny for off canvas-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+      <!--Custom CSS-->
+      <link rel="stylesheet" href="css/style.css">
+   </head>
+   <body>
+      <!--Off Canvas Menu-->
+      <div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+         <a class="navmenu-brand visible-md visible-lg" href="#">Bavarian Cities</a>
+         <form>
+            <div class="group">
+               <input type="text" data-bind="textInput: searchBox">
+               <span class="highlight"></span>
+               <span class="bar"></span>
+               <label>Filter by Name</label>
+            </div>
+         </form>
+         <ul class="nav navmenu-nav list-group" data-bind="foreach: filteredPlaces">
+            <li class="list-group-item" data-bind="click: $root.showPlace">
+               <span data-bind="text: name"></span>
+            </li>
+         </ul>
+      </div>
+      <div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+         <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="#">Project name</a>
+      </div>
+      <!--Main Content-->
+      <div id="main">
+         <!--Google Maps-->
+         <div id="map" style="width: 100%; height: 100vh"></div>
+      </div>
+      <!-- /.container -->
+      <!--Ressources-->
+      <!--JQuery-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <!--Bootstrap JS-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <!--Jasny-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+      <!--Knockout JS-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+      <!--Custom JS-->
+      <script src="js/data.js"></script>
+      <script src="js/model.js"></script>
+      <script src="js/model_view.js"></script>
+      <script src="js/main.js"></script>
+   </body>
 </html>
