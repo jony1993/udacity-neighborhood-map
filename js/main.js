@@ -1,6 +1,6 @@
 //Load the google Maps API
 //Maps Script with key
-var googleMaps = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAkwr2hIuNm_8TD72-wS9SqR-r7OTPdWmc"
+var googleMaps = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAkwr2hIuNm_8TD72-wS9SqR-r7OTPdWmc";
 
 // map parameters
 var map;

@@ -13,4 +13,5 @@ var Place = function(data){
         map: map,
         position: self.location
     });
+
 };

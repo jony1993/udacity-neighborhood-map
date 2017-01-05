@@ -37,7 +37,7 @@ var placesViewModel = function() {
                     place.marker.setVisible(true);
 
                     // add onlick functionality for each visibile place / marker
-                    place.marker.addListener("click", function() {
+                    place.marker.addListener('click', function() {
                         activateMarker(place)();
                     });
 
@@ -63,7 +63,9 @@ var placesViewModel = function() {
 
     // close info window listener
     google.maps.event.addListener(self.infoWindow, "closeclick", function() {
+        //zoom back
         map.setZoom(8);
+
     });
 
     //activate marker function
@@ -77,16 +79,33 @@ var placesViewModel = function() {
             map.setZoom(12);
             map.setCenter(clickedPlace.marker.getPosition());
 
+            //bounce marker
+            clickedPlace.marker.setAnimation(google.maps.Animation.BOUNCE);
+
             //open info Box
             self.infoWindow.open(map, clickedPlace.marker);
 
-        }
+        };
     }
 
     //Update Info Boxes method
     function updateInfoBoxes(clickedPlace) {
 
-        var contentString = '' +
+        //Set Window Info Content
+        self.infoWindow.setContent(getWindowInfoContent(clickedPlace, null, null));
+
+        //load tripadvisor content
+        wikiRequest(clickedPlace);
+
+    }
+
+
+    function getWindowInfoContent(clickedPlace, error, wikiList) {
+
+        var contentString = '';
+
+        //Basic Content
+        contentString = '' +
             '<div>' +
             '<h1>' +
             clickedPlace.name +
@@ -95,18 +114,37 @@ var placesViewModel = function() {
             '<p>' +
             clickedPlace.description +
             '</p>' +
-            '<h2>Related Wiki Articles</h2>' +
-            '<div id="loading"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</div>' +
-            '<ul id="wikilist"></ul>' +
-            '</div>' +
-            '</div>';
+            '<h2>Related Wiki Articles</h2>';
 
-        self.infoWindow.setContent(contentString);
+        //wikiList Loading
+        if (wikiList == null && error == null) {
+            contentString += '<div id="loading"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</div>';
+        }
 
-        //load tripadvisor content
-        wikiRequest(clickedPlace);
+        //WikiList
+        else if (wikiList !== null) {
+            contentString += '<ul id="wikilist"></ul>';
+
+            for (var i = 0; i < wikiList.length; i++) {
+                articleStr = wikiList[i];
+                var url = "https://en.wikipedia.org/wiki/" + articleStr;
+                contentString += "<li><a target='blank' href='" + url + "'>" + articleStr + "</a></li>";
+            }
+            contentString += '</ul>';
+        }
+
+        //error
+        else {
+            contentString += "<div class='alert alert-danger'>Failed to get wikipedia resource</div>";
+        }
+
+        contentString += '</div></div>';
+
+        return contentString;
 
     }
+
+
 
     //method to get the wikipedia articles
     function wikiRequest(clickedPlace) {
@@ -117,31 +155,22 @@ var placesViewModel = function() {
         var wikiString = "";
 
         var wikiRequestTimeout = setTimeout(function() {
-            $('#wikilist').append("<div class='alert alert-danger'>Failed to get wikipedia resource</div>");
+            self.infoWindow.setContent(getWindowInfoContent(clickedPlace, 1, null));
         }, 8000);
 
         $.ajax({
-            url: wikiUrl,
-            dataType: "jsonp",
+                url: wikiUrl,
+                dataType: "jsonp"
 
-            // Function to be called if the request succeeds
-            success: function(response) {
-
+            })
+            .done(function(response) {
                 var articleList = response[1];
 
-                for (var i = 0; i < articleList.length; i++) {
-                    articleStr = articleList[i];
-                    var url = "https://en.wikipedia.org/wiki/" + articleStr;
-                    $('#wikilist').append("<li><a target='blank' href='" + url + "'>" + articleStr + "</a></li>");
-                }
+                self.infoWindow.setContent(getWindowInfoContent(clickedPlace, null, articleList));
 
-                //remove loading div
-                $('#loading').remove();
+            })
 
-                clearTimeout(wikiRequestTimeout);
-
-            }
-        });
+            .fail(clearTimeout(wikiRequestTimeout));
 
     }
 };
